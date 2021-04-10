@@ -1,0 +1,24 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: centos8
+    image: hub.docker.com/r/centos/python-38-centos7
+    pre_build_image: true
+  - name: centos72
+    image: hub.docker.com/r/centos/python-36-centos7
+    pre_build_image: true
+  - name: pubuntu
+    image: hub.docker.com/r/pycontribs/ubuntu/dockerfile
+    pre_build_image: true
+provisioner:
+  name: ansible
+  inventory:
+    group_vars:
+      all:
+          kibana_version: "7.12.0"
+          kibana_home: "/opt/elastic/{{ kibana_version }}"
+verifier:
+  name: ansible
